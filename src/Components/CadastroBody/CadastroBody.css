@@ -124,3 +124,22 @@
 .input-block input {
     margin-right: 3vw !important;
 }
+
+#dados-pessoais-button button {
+    width: 45vw;
+    height: 6vh;
+    background-color: #28a3db;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    font-size: 12px;
+}
+
+#dados-pessoais-button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5vh;
+}
