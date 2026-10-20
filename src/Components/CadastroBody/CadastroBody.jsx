@@ -118,7 +118,9 @@ function CadastroBody() {
               />
             </div>
           </div>
-
+          <div id="dados-pessoais-button">
+            <button>Acessar</button>
+          </div>
         </div>
 
       </section>
