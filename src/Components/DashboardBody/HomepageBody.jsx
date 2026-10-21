@@ -1,14 +1,6 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import "./HomepageBody.css";
 
-const CATEGORIES = [
-  { id: "notebooks", name: "Notebooks", icon: "laptop" },
-  { id: "smartphones", name: "Smartphones", icon: "phone" },
-  { id: "audio", name: "Áudio", icon: "headphones" },
-  { id: "monitores", name: "Monitores", icon: "monitor" },
-  { id: "perifericos", name: "Periféricos", icon: "mouse" },
-  { id: "wearables", name: "Wearables", icon: "watch" },
-];
 
 const PRODUCTS = [
   { id: 1, name: "Notebook Pro 14\"", category: "notebooks", price: 5499.9, oldPrice: 6299.9, rating: 4.8, reviews: 214, image: "" },
@@ -109,6 +101,31 @@ export default function HomepageBody() {
   const [cartCount, setCartCount] = useState(0);
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
+  const [categorias,setCategorias] = useState([]);
+  const [produtos,setProdutos] = useState([]);
+
+
+  useEffect(() => {
+    const fetchCategorias = async () => {
+      const fetchCategorias = await fetch("https://6ad7ecb995e98f36aef2d7bb.mockapi.io/api/categorias")
+        const data = await fetchCategorias.json()
+        setCategorias(data)
+
+
+    }
+    fetchCategorias()
+  },[])
+
+   useEffect(() => {
+    const fetchProdutos = async () => {
+      const fetchProdutos = await fetch("https://6ad7ffe495e98f36aef2e16f.mockapi.io/api/produtos")
+        const data = await fetchCategorias.json()
+        setProdutos(data)
+
+
+    }
+    fetchProdutos()
+  },[])
 
   const visibleProducts = useMemo(() => {
     const term = search.trim().toLowerCase();
@@ -177,7 +194,7 @@ export default function HomepageBody() {
             <span className="line" />
           </div>
           <div className="home-categories">
-            {CATEGORIES.map((c) => (
+            {categorias.map((c) => (
               <button
                 key={c.id}
                 type="button"
@@ -199,9 +216,9 @@ export default function HomepageBody() {
             <span className="line" />
           </div>
 
-          {visibleProducts.length > 0 ? (
+          {produtos.length > 0 ? (
             <div className="home-grid">
-              {visibleProducts.map((p) => (
+              {produtos.map((p) => (
                 <ProductCard key={p.id} product={p} onAdd={() => setCartCount((n) => n + 1)} />
               ))}
             </div>
